@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Beauty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Neue+Machina:wght@400;700&family=Nohemi&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+          margin: 0;
+          padding: 0;
+          background: linear-gradient(135deg, #fef6f9, #fde2e4);
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          height: 100vh;
+          width: 100vw;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .card {
+          background-color: white;
+          border-radius: 25px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+          padding: 40px;
+          max-width: 600px;
+          width: 90%;
+          height: 90vh;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        h1 {
+          font-size: 2.5rem;
+          color: #e75480;
+          margin: 0;
+        }
+
+        .title-screen {
+          font-family: 'Comic Sans MS', cursive, sans-serif;
+          font-size: 3rem;
+          color: #d6336c;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+        }
+
+        .beauty-list {
+          font-size: 1.2rem;
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .beauty-page {
+          display: none;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .beauty-item {
+          opacity: 0;
+          transform: translateY(20px);
+          background: #ffe4ec;
+          padding: 6px 10px;
+          border-radius: 10px;
+          max-width: 100%;
+          font-family: 'Neue Machina', sans-serif;
+          color: #cc3366;
+          animation: appear 0.5s ease forwards;
+        }
+
+        @keyframes appear {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .beauty-item:hover {
+          background: #fad0db;
+        }
+
+        .nav-buttons {
+          display: flex;
+          justify-content: space-between;
+          gap: 10px;
+        }
+
+        .nav-buttons button {
+          background-color: #e75480;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 12px;
+          cursor: pointer;
+          font-size: 1rem;
+          transition: background 0.3s ease;
+        }
+
+        .nav-buttons button:hover {
+          background-color: #d24372;
+        }
+
+        .final-message {
+          font-size: 1.4rem;
+          font-weight: bold;
+          color: #cc3366;
+          white-space: pre-wrap;
+          background: #fff0f5;
+          border-radius: 15px;
+          display: none;
+          flex-grow: 1;
+          overflow-y: auto;
+          padding: 20px;
+          font-family: 'Nohemi', sans-serif;
+        }
+
+        .final-message.visible {
+          display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div id="titleScreen" class="title-screen">Pepper and Onions</div>
+    <div class="beauty-list" id="beautyList">
+        <div id="page1" class="beauty-page">
+            <div class="beauty-item" data-delay="0.1s">Mma</div>
+            <div class="beauty-item" data-delay="0.3s">Beauty</div>
+            <div class="beauty-item" data-delay="0.5s">Beauté</div>
+            <div class="beauty-item" data-delay="0.7s">Belleza</div>
+            <div class="beauty-item" data-delay="0.9s">Schönheit</div>
+            <div class="beauty-item" data-delay="1.1s">美しさ</div>
+            <div class="beauty-item" data-delay="1.3s">جمال</div>
+            <div class="beauty-item" data-delay="1.5s">Piękno</div>
+            <div class="beauty-item" data-delay="1.7s">Kauneus</div>
+            <div class="beauty-item" data-delay="1.9s">Skönhet</div>
+            <div class="beauty-item" data-delay="2.1s">सुंदरता</div>
+        </div>
+        <div id="page2" class="beauty-page">
+            <div class="beauty-item" data-delay="0.1s">Güzellik</div>
+            <div class="beauty-item" data-delay="0.3s">Краса</div>
+            <div class="beauty-item" data-delay="0.5s">Gražumas</div>
+            <div class="beauty-item" data-delay="0.7s">Krása</div>
+            <div class="beauty-item" data-delay="0.9s">Vackert</div>
+            <div class="beauty-item" data-delay="1.1s">Frumusete</div>
+            <div class="beauty-item" data-delay="1.3s">ความงาม</div>
+            <div class="beauty-item" data-delay="1.5s">Estetika</div>
+            <div class="beauty-item" data-delay="1.7s">Skønhed</div>
+            <div class="beauty-item" data-delay="1.9s">Krasa</div>
+            <div class="beauty-item" data-delay="2.1s">Ugegbe e ji achu mmuo ojoo</div>
+        </div>
+    </div>
+    <div class="final-message" id="finalMessage">
+        dear Mma, don't step outside today; we're at risk of global warming, and you don't have to add to it, since na you dey hot.
+
+        and birthday wishes to you again, sweetheart.
+
+        you are too sexy for this world to see, so i will keep you safe in my eyes and in my mind.
+
+        in case you did not notice, you were the only capital letter in this entire write-up, because you're the only one who is truly important today.
+    </div>
+    <div class="nav-buttons">
+        <button id="prevBtn">Previous</button>
+        <button id="nextBtn">Next</button>
+    </div>
+</div>
+
+<script>
+    const titleScreen = document.getElementById('titleScreen');
+    const finalMessage = document.getElementById('finalMessage');
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+
+    const pages = [titleScreen, page1, page2, finalMessage];
+    let index = 0;
+
+    function showPage(i) {
+      pages.forEach((page, idx) => {
+        if (idx === i) {
+          if (page === titleScreen) page.style.display = 'flex';
+          else if (page === finalMessage) page.classList.add('visible');
+          else {
+            page.style.display = 'flex';
+            const items = page.querySelectorAll('.beauty-item');
+            items.forEach(item => {
+              item.style.animation = 'none';
+              item.offsetHeight;
+              item.style.animation = `appear 0.5s ease forwards ${item.dataset.delay || '0s'}`;
+            });
+          }
+        } else {
+          if (page === titleScreen) page.style.display = 'none';
+          else if (page === finalMessage) page.classList.remove('visible');
+          else page.style.display = 'none';
+        }
+      });
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      index = (index + 1) % pages.length;
+      showPage(index);
+    });
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      index = (index - 1 + pages.length) % pages.length;
+      showPage(index);
+    });
+
+    window.onload = () => {
+      showPage(index);
+    };
+</script>
+</body>
+</html>
