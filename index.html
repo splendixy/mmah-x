@@ -45,7 +45,6 @@
           justify-content: center;
           align-items: center;
           height: 100%;
-          transition: opacity 0.5s ease;
         }
 
         .beauty-list {
@@ -54,21 +53,12 @@
           display: flex;
           flex-direction: column;
           justify-content: center;
-          overflow-y: auto;
         }
 
         .beauty-page {
           display: none;
           flex-direction: column;
           gap: 10px;
-          overflow-y: auto;
-          opacity: 0;
-          transition: opacity 0.5s ease;
-        }
-
-        .beauty-page.visible {
-          display: flex;
-          opacity: 1;
         }
 
         .beauty-item {
@@ -111,17 +101,12 @@
           transition: background 0.3s ease;
         }
 
-        .nav-buttons button:hover:not(:disabled) {
+        .nav-buttons button:hover {
           background-color: #d24372;
         }
 
-        .nav-buttons button:disabled {
-          opacity: 0.4;
-          cursor: default;
-        }
-
         .final-message {
-          font-size: 1rem;
+          font-size: 1.2rem;
           font-weight: bold;
           color: #cc3366;
           white-space: pre-wrap;
@@ -132,13 +117,10 @@
           padding: 20px;
           font-family: 'Nohemi', sans-serif;
           max-height: 60vh;
-          transition: opacity 0.5s ease;
-          opacity: 0;
         }
 
         .final-message.visible {
           display: block;
-          opacity: 1;
         }
     </style>
 </head>
@@ -195,20 +177,15 @@
     const page2 = document.getElementById('page2');
 
     const pages = [titleScreen, page1, page2, finalMessage];
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
     let index = 0;
 
     function showPage(i) {
       pages.forEach((page, idx) => {
         if (idx === i) {
-          if (page === titleScreen) {
+          if (page === titleScreen) page.style.display = 'flex';
+          else if (page === finalMessage) page.classList.add('visible');
+          else {
             page.style.display = 'flex';
-            page.style.opacity = '1';
-          } else if (page === finalMessage) {
-            page.classList.add('visible');
-          } else {
-            page.classList.add('visible');
             const items = page.querySelectorAll('.beauty-item');
             items.forEach(item => {
               item.style.animation = 'none';
@@ -217,33 +194,21 @@
             });
           }
         } else {
-          if (page === titleScreen) {
-            page.style.display = 'none';
-          } else if (page === finalMessage) {
-            page.classList.remove('visible');
-          } else {
-            page.classList.remove('visible');
-            page.style.display = 'none';
-          }
+          if (page === titleScreen) page.style.display = 'none';
+          else if (page === finalMessage) page.classList.remove('visible');
+          else page.style.display = 'none';
         }
       });
-
-      prevBtn.disabled = i === 0;
-      nextBtn.disabled = i === pages.length - 1;
     }
 
-    nextBtn.addEventListener('click', () => {
-      if (index < pages.length - 1) {
-        index++;
-        showPage(index);
-      }
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      index = (index + 1) % pages.length;
+      showPage(index);
     });
 
-    prevBtn.addEventListener('click', () => {
-      if (index > 0) {
-        index--;
-        showPage(index);
-      }
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      index = (index - 1 + pages.length) % pages.length;
+      showPage(index);
     });
 
     window.onload = () => {
